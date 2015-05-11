@@ -2,7 +2,7 @@
 // minify and add 'javascript:' to the beginning.
 
 (function(){ 
-	function loadScript(url) {
+	function loadScript(url, callback) {
 		var head = document.getElementsByTagName("body")[0];
 		var script = document.createElement("script");
 		script.src = url;
@@ -17,6 +17,9 @@
 			{
 				done = true;
 
+				// Continue your code
+				callback();
+
 				// Handle memory leak in IE
 				script.onload = script.onreadystatechange = null;
 				head.removeChild( script );
@@ -26,8 +29,18 @@
 		head.appendChild(script);
 	}
 
-	var scriptUrl = prompt('Script URL?')
+	function thingToDo() {
+		$("*").css({"color":"#000000"});
+		$("*").css({"background":"#ffffff"});
+		$("img").css({"display":"none"});		
+	}
 
-	loadScript(scriptUrl);
+	if (window.jQuery) {
+		thingToDo();
+	} else {
+		var scriptUrl = "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js";
+		loadScript(scriptUrl, thingToDo);
+	}
+
 
 })();

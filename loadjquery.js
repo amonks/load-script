@@ -26,8 +26,9 @@
 		head.appendChild(script);
 	}
 
-	var scriptUrl = prompt('Script URL?')
-
-	loadScript(scriptUrl);
+	if (window.jQuery) {} else {
+		var scriptUrl = "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js";
+		loadScript(scriptUrl);
+	}
 
 })();
